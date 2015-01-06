@@ -1,0 +1,236 @@
+{% import "_includes/forms" as forms %}
+
+<div class="advanced_date-field" id="{{ handle }}"></div>
+<div class="field all-day">
+	<div class="heading">
+		<label for="{{ handle }}-allday">All Day</label>
+		<div class="instructions">
+			<p>Does this event last all day?</p>
+		</div>
+	</div>
+	<div class='allday-switch'>
+	{{ forms.lightswitch({
+		id: handle~'allday',
+		name: handle~'[allday]',
+		on: (allday is defined ? allday : null)
+	}) }}
+	</div>
+</div>
+<div class="field starttime">
+	<div class="heading">
+		<label for="{{ handle }}-starttime">Event Start</label>
+	</div>
+	{{ forms.date({
+		name: handle~'[start_date]',
+		id: handle~'start_date',
+		value: (start_date is defined ? start_date : null)
+	}) }}
+	<span class='starttime-time'>
+	{{ forms.time({
+		name: handle~'[start_time]',
+		id: handle~'start_time',
+		value: (start_time is defined ? start_time : null)
+	}) }}
+	</span>
+</div>
+<div class="field endtime">
+	<div class="heading">
+		<label for="{{ handle }}-endtime">Event End</label>
+	</div>
+	{{ forms.date({
+		name: handle~'[end_date]',
+		id: handle~'end_date',
+		value: (end_date is defined ? end_date : null)
+	}) }}
+	<span class='endtime-time'>
+	{{ forms.time({
+		name: handle~'[end_time]',
+		id: handle~'end_time',
+		value: (end_time is defined ? end_time : null)
+	}) }}
+	</span>
+</div>
+<div class="field repeats">
+	<div class="heading">
+		<label for="{{ handle }}-repeats">Repeats</label>
+		<div class="instructions">
+			<p>Does this event occur multiple times?</p>
+		</div>
+	</div>
+	<div class='repeats-switch'>
+	{{ forms.lightswitch({
+		name: handle~'[repeats]',
+		on: (repeats is defined ? repeats : null)
+	}) }}
+	</div>
+</div>
+
+<div class='repeat-holder'>
+
+	<div class="field frequency">
+		<div class="heading">
+			<label for="{{ handle }}-frequency">Frequency</label>
+		</div>
+		{{ forms.select({
+			id: handle~'repeat-frequency',
+			name: handle~'[frequency]',
+			value: (frequency is defined ? frequency : 'daily'),
+			options: {
+				'daily': 'Daily',
+				'weekly': 'Weekly',
+				'monthly': 'Monthly',
+				'yearly': 'Yearly'
+			}
+		}) }}
+	</div>
+	<div class="field interval">
+		<div class="heading">
+			<label for="{{ handle }}-interval">Repeat Every</label>
+		</div>
+		{{ forms.select({
+			name: handle~'[interval]',
+			id: 'repeat-interval',
+			value: ( interval is defined ? interval : 1 ),
+			options: {
+				1: 1,
+				2: 2,
+				3: 3,
+				4: 4,
+				5: 5,
+				6: 6,
+				7: 7,
+				8: 8,
+				9: 9,
+				10: 10,
+				11: 11,
+				12: 12,
+				13: 13,
+				14: 14,
+				15: 15,
+				16: 16,
+				17: 17,
+				18: 18,
+				19: 19,
+				20: 20,
+				21: 21,
+				22: 22,
+				23: 23,
+				24: 24,
+				25: 25,
+				26: 26,
+				27: 27,
+				28: 28,
+				29: 29,
+				30: 30,
+				31: 31,
+			}
+		}) }}
+		<span class='repeat-every-unit'>days</span>
+	</div>
+	<div class="field weekdays">
+		<div class="heading">
+			<label for="{{ handle }}-weekdays">Repeat On</label>
+		</div>
+		{{ forms.checkboxGroup({
+			name: handle~'[weekdays]',
+			values: (weekdays is defined ? weekdays : null),
+			options: {
+				'SU' : 'Sunday',
+				'MO' : 'Monday',
+				'TU' : 'Tuesday',
+				'WE' : 'Wednesday',
+				'TH' : 'Thursday',
+				'FR' : 'Friday',
+				'SA' : 'Saturday',
+			}
+		}) }}
+	</div>
+	<div class="field repeat_by">
+		<div class="heading">
+			<label for="{{ handle }}-repeat_by">Repeat By</label>
+		</div>
+		{{ forms.radioGroup({
+			name: handle~'[repeat_by]',
+			value: (repeat_by is defined and repeat_by is not null ? repeat_by : 'month'),
+			options: {
+				'month' : 'Day of Month',
+				'week' : 'Day of Week',
+			}
+		}) }}
+	</div>
+	<div class="field ends">
+		<div class="heading">
+			<label for="{{ handle }}-ends">Repeat Ends</label>
+		</div>
+		{{ forms.select({
+			id: handle~'repeat-ends',
+			name: handle~'[ends]',
+			value: (ends is defined ? ends : 'after'),
+			options: {
+				'after': 'After',
+				'until': 'Until',
+			}
+		}) }}
+
+		<div class='field occurrences'>
+			
+			<div class='heading'>
+				<label for="occurrences">Number of Occurrences</label>
+			</div>
+			{{ forms.text({ 
+				name: handle~'[count]', 
+				value: ( count is defined ? count : 5 ), 
+				size: '20px', 
+				maxlength: '5'
+			}) }}
+
+		</div>
+
+		<div class='field until'>
+			
+			<div class='heading'>
+				<label for="until">Repeat End Date</label>
+			</div>
+			{{ forms.date({
+				name: handle~'[until]',
+				id: handle~'until',
+				value: ( until is defined ? until : null )
+			}) }}
+
+		</div>
+
+		<div class="field exdates">
+			<div class='heading'>
+				<label for="exdates">Excluded Dates</label>
+			</div>
+			<div class="padding" style="padding-bottom: 5px; display: none;">
+			{{ forms.date({
+				name: handle~'[exdates-temp]',
+				id: handle~'exdates0',
+				value: ''
+			}) }}<a style="padding-left: 5px;" class="delete icon" title="Delete" onclick="$(this).fadeOut(300, function(){ $(this).parent().remove(); });"></a>
+			</div>
+			{% for date in exdates %}
+				<div class="padding" style="padding-bottom: 5px;">
+				{{ forms.date({
+					name: handle~'[exdates][]',
+					id: handle~'exdates'~loop.index,
+					value: (date is defined ? date : null)
+				}) }}<a style="padding-left: 5px;" class="delete icon" title="Delete" onclick="$(this).fadeOut(300, function(){ $(this).parent().remove(); });"></a>
+				</div>
+			{% endfor %}
+			<div class="buttons">
+				<div class="btngroup">
+					<div id="{{ handle }}date-add" class="btn add icon">{{ "Excluded Date"|t }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% set rangeSliderFieldJs %}
+	$(function() { window.advancedDate.create('{{ namespaceId }}'); });
+{% endset %}
+{% includeJs rangeSliderFieldJs %}
+
+{% includeJsResource "recurringdate/js/advanceddate.js" %}

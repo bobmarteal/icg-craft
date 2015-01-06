@@ -1,0 +1,14 @@
+
+<ul>
+{% for entry in craft.entries.section('mainNavigation').find() %}
+		{% if entry.type == "mainNavigationEntries" %}
+			{% for link in entry.navigationEntries %}
+			<li>
+				<a href="{% if link.slug == "homepage"%}/{% else %}/{{link.slug}}{% endif %}">{{entry.title}}</a>
+			</li>
+			{% endfor %}
+		{% elseif entry.type == "mainNavigationText" %}
+			<li><a href="/{{entry.navigationTextLink}}">{{entry.title}}</a></li>
+		{% endif %}
+{% endfor %}
+</ul>

@@ -1,0 +1,118 @@
+
+
+// --------------------------------------------------------------------------------------
+// A More Modern Scale for Web Typography
+// Based on this article: http://typecast.com/blog/a-more-modern-scale-for-web-typography
+// --------------------------------------------------------------------------------------
+
+$body-font-size: 1.3rem !default; // 18px
+
+// Setting body content scale
+@mixin body-type($line-height: 1.5) {
+
+  body{
+    font-size: $body-font-size; // 18px
+    line-height: $line-height;  //1.4
+    font-family: $bodyFont;
+	
+    @media (min-width: 43.75em) {
+      font-size: $body-font-size; // 18px
+      line-height: $line-height * 1.15; // 1.54
+    }
+  }
+}
+
+// Setting h1 scale
+@mixin h1-type($line-height: 1) {
+  h1 {
+    font-size: $body-font-size * 2.222; 
+    line-height: $line-height;
+    margin: 1em 0 0.2em 0;
+
+    @media (min-width: 43.75em) {
+      font-size: $body-font-size * 3; 
+      line-height: $line-height * .9; 
+      margin: 1em 0 0.4em 0;
+    }
+
+    @media (min-width: 56.25em) {
+      font-size: $body-font-size * 3; 
+      line-height: $line-height * .85; 
+    }
+  }
+}
+
+// Setting h2 scale
+@mixin h2-type($line-height: 1) {
+  h2 {
+    font-size: $body-font-size * 2;
+    line-height: $line-height * .92; 
+    margin: 1.2em 0em 0.5em 0em;
+
+    @media (min-width: 43.75em) {
+      font-size: $body-font-size * 2; 
+      line-height: $line-height;
+      margin: 1em 0em 0.5em 0em;
+    }
+
+    @media (min-width: 56.25em) {
+      font-size: $body-font-size * 2.5; 
+    }
+  }
+}
+
+// Setting h3 scale
+@mixin h3-type($font-size: 1.75em, $line-height: 1.25) {
+  h3 {
+    font-size: $body-font-size * 1.75; 
+    line-height: $line-height * .909; 
+    margin: 1.2em 0em 0.2em 0em;
+
+    @media (min-width: 43.75em) {
+      font-size: $body-font-size * 1.5; 
+      line-height: $line-height;
+    }
+
+    @media (min-width: 56.25em) {
+      font-size: $body-font-size * 2; 
+      line-height: $line-height;
+    }
+  }
+}
+
+// Setting h4 scale
+@mixin h4-scale($line-height: 1.11) {
+  h4 {
+    font-size: $body-font-size * 1.125; // 1.1255x body copy size = 18px
+    line-height: $line-height;
+
+    @media (min-width: 43.75em) {
+      line-height: $line-height * 1.1; // 1.221
+    }
+  }
+}
+
+// Setting blockquote scale
+@mixin blockquote-scale($font-size: 1.25em, $line-height: 1.25) {
+  blockquote {
+    font-size: $font-size;
+    line-height: $line-height * 1.2; // 1.5
+
+    @media (min-width: 43.75em) {
+      font-size: $font-size;
+      line-height: $line-height * 1.166; // 1.4575
+    }
+  }
+}
+ 
+
+h1,h2,h3{
+	font-family:$headerFont;
+	font-weight: normal;
+}
+
+//@include reset-body-font-size;
+@include body-type;
+@include h1-type;
+@include h2-type;
+@include h3-type;

@@ -1,0 +1,55 @@
+{#
+ # Education Program index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/education is
+ # requested, because it is located at education/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://buildwithcraft.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set title = "education" %}
+
+{% block content %}
+	<h1>education</h1>
+
+	{% for entry in craft.entries.section('education').find() %}
+		<article>
+			<h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+			<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
+			{{ entry.body.getPage(1) }}
+			<p><a href="{{ entry.url }}">Continue reading</a></p>
+			{% if entry.dates2 %}
+			<h2>Dates2</h2>
+			<ul>
+			{% for block in entry.dates2 %}
+
+				{% if block.type == "dates2block" %}
+					<li>{{ block.dates2date }}</li>
+				{% endif %}
+
+			{% endfor %}
+			</ul>
+			{% endif %}
+
+			{% for block in entry.dates %}
+
+			
+			
+
+			{% if block.type == "theDates" %}
+			<p>	Dates<br>		
+				{{ block.date1 }}<br />
+				{{ block.date2 }}<br />
+				{{ block.date3 }}
+			</p>
+			{% endif %}
+
+{% endfor %}
+		</article>
+		<hr />
+	{% endfor %}
+{% endblock %}

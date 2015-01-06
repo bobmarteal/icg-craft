@@ -1,0 +1,478 @@
+@charset "UTF-8";
+/* Colors */
+/* Fonts */
+@import url(../Droid-Sans/droid-sans.css);
+@import url(../Rabiohead-fontfacekit/stylesheet.css);
+/* beuton radi */
+/* measures */
+h1, h2, h3 {
+  font-family: "rabiohead";
+  font-weight: normal; }
+
+body {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-family: "droid_sansregular"; }
+  @media (min-width: 43.75em) {
+    body {
+      font-size: 1.3rem;
+      line-height: 1.725; } }
+
+h1 {
+  font-size: 2.8886rem;
+  line-height: 1;
+  margin: 1em 0 0.2em 0; }
+  @media (min-width: 43.75em) {
+    h1 {
+      font-size: 3.9rem;
+      line-height: 0.9;
+      margin: 1em 0 0.4em 0; } }
+  @media (min-width: 56.25em) {
+    h1 {
+      font-size: 3.9rem;
+      line-height: 0.85; } }
+
+h2 {
+  font-size: 2.6rem;
+  line-height: 0.92;
+  margin: 1.2em 0em 0.5em 0em; }
+  @media (min-width: 43.75em) {
+    h2 {
+      font-size: 2.6rem;
+      line-height: 1;
+      margin: 1em 0em 0.5em 0em; } }
+  @media (min-width: 56.25em) {
+    h2 {
+      font-size: 3.25rem; } }
+
+h3 {
+  font-size: 2.275rem;
+  line-height: 1.13625;
+  margin: 1.2em 0em 0.2em 0em; }
+  @media (min-width: 43.75em) {
+    h3 {
+      font-size: 1.95rem;
+      line-height: 1.25; } }
+  @media (min-width: 56.25em) {
+    h3 {
+      font-size: 2.6rem;
+      line-height: 1.25; } }
+
+/*------------------------------------*\
+    $BEAUTONS.CSS
+\*------------------------------------*/
+/**
+ * beautons is a beautifully simple button toolkit.
+ *
+ * LICENSE
+ * 
+ * Copyright 2013 Harry Roberts
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+/*!*
+ * 
+ * @csswizardry -- csswizardry.com/beautons
+ * 
+ */
+/*------------------------------------*\
+    $BASE
+\*------------------------------------*/
+/**
+ * Base button styles.
+ *
+ * 1. Allow us to better style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Stop buttons wrapping and looking broken.
+ * 4. Make buttons inherit font styles.
+ * 5. Force all elements using beautons to appear clickable.
+ * 6. Normalise box model styles.
+ * 7. If the button’s text is 1em, and the button is (3 * font-size) tall, then
+ *    there is 1em of space above and below that text. We therefore apply 1em
+ *    of space to the left and right, as padding, to keep consistent spacing.
+ * 8. Basic cosmetics for default buttons. Change or override at will.
+ * 9. Don’t allow buttons to have underlines; it kinda ruins the illusion.
+ */
+.btn {
+  display: inline-block;
+  /* [1] */
+  vertical-align: middle;
+  /* [2] */
+  white-space: nowrap;
+  /* [3] */
+  font-family: "droid_sansregular";
+  /* [4] */
+  cursor: pointer;
+  /* [5] */
+  border: none;
+  /* [6] */
+  margin: 0;
+  margin-bottom: 20px;
+  /* [6] */
+  padding-top: 0;
+  /* [6] */
+  padding-bottom: 0;
+  /* [6] */
+  line-height: 3;
+  /* [7] */
+  padding-right: 1em;
+  /* [7] */
+  padding-left: 1em;
+  /* [7] */
+  border-radius: 3px;
+  /* [8] */
+  color: #020201; }
+
+.btn, .btn:hover {
+  text-decoration: none;
+  /* [9] */ }
+.btn:active, .btn:focus {
+  outline: none; }
+.btn.is-checked {
+  background: rgba(2, 2, 1, 0.5); }
+
+/*------------------------------------*\
+    $SIZES
+\*------------------------------------*/
+/**
+ * Button size modifiers.
+ *
+ * These all follow the same sizing rules as above; text is 1em, space around it
+ * remains uniform.
+ */
+.btn--small {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  line-height: 2; }
+
+.btn--large {
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  line-height: 4; }
+
+.btn--huge {
+  padding-right: 2em;
+  padding-left: 2em;
+  line-height: 5; }
+
+/**
+ * These buttons will fill the entirety of their container.
+ *
+ * 1. Remove padding so that widths and paddings don’t conflict.
+ */
+.btn--full {
+  width: 100%;
+  padding-right: 0;
+  /* [1] */
+  padding-left: 0;
+  /* [1] */
+  text-align: center; }
+
+/*------------------------------------*\
+    $FONT-SIZES
+\*------------------------------------*/
+/**
+ * Button font-size modifiers.
+ */
+.btn--alpha {
+  font-size: 3rem; }
+
+.btn--beta {
+  font-size: 2rem; }
+
+.btn--gamma {
+  font-size: 1rem; }
+
+/**
+ * Make the button inherit sizing from its parent.
+ */
+.btn--natural {
+  vertical-align: baseline;
+  font-size: inherit;
+  line-height: inherit;
+  padding-right: 0.5em;
+  padding-left: 0.5em; }
+
+/*----------------------------------
+
+Button Color modifiers
+
+-----------------------------------*/
+.btn--purple {
+  background-image: -webkit-linear-gradient(#533370, #69428c);
+  background-image: linear-gradient(#533370, #69428c);
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  transition-duration: 0.5s; }
+  .btn--purple:hover {
+    background: #4a2d65; }
+
+.btn--blue {
+  background-image: -webkit-linear-gradient(#013554, #024973);
+  background-image: linear-gradient(#013554, #024973); }
+
+.btn--green {
+  background-image: -webkit-linear-gradient(#2d7f77, #39958c);
+  background-image: linear-gradient(#2d7f77, #39958c); }
+
+/*------------------------------------*\
+    $FUNCTIONS
+\*------------------------------------*/
+/**
+ * Button function modifiers.
+ */
+/**
+ * Positive actions; e.g. sign in, purchase, submit, etc.
+ */
+.btn--positive {
+  background-color: #4A993E;
+  color: #fff; }
+
+/**
+ * Negative actions; e.g. close account, delete photo, remove friend, etc.
+ */
+.btn--negative {
+  background-color: #b33630;
+  color: #fff; }
+
+/**
+ * Inactive, disabled buttons.
+ * 
+ * 1. Make the button look like normal text when hovered.
+ */
+.btn--inactive,
+.btn--inactive:hover,
+.btn--inactive:active,
+.btn--inactive:focus {
+  background-color: #ddd;
+  color: #777;
+  cursor: text;
+  /* [1] */ }
+
+/*------------------------------------*\
+    $STYLES
+\*------------------------------------*/
+/**
+ * Button style modifiers.
+ *
+ * 1. Use an overly-large number to ensure completely rounded, pill-like ends.
+ */
+.btn--soft {
+  border-radius: 200px;
+  /* [1] */ }
+
+.btn--hard {
+  border-radius: 0; }
+
+body, html {
+  margin: 0;
+  padding: 0; }
+
+.wrapper {
+  width: 100%; }
+
+header {
+  max-width: 1060px;
+  margin: 0 auto; }
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2; }
+  .content:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+/* Containers */
+.container--full {
+  width: 100%; }
+
+.container--eight {
+  width: 66%; }
+
+.container--four {
+  width: 32%; }
+
+.container--five {
+  width: 40%; }
+
+body {
+  -webkit-font-smoothing: subpixel-antialiased; }
+
+/* Special Headings */
+.siteTitle {
+  float: left;
+  margin: 30px 0;
+  line-height: 1.5em;
+  margin-left: 20px; }
+  .siteTitle a {
+    color: #020201;
+    text-decoration: none;
+    padding-left: 120px;
+    padding-bottom: 20px;
+    background: url(../images/layout/turtle-100.png) no-repeat; }
+
+.mainImage {
+  text-align: center; }
+
+/*
+Page Header
+*/
+.hero {
+  position: relative;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 1.75;
+  margin-top: -143px; }
+  .hero p {
+    margin: 3rem 0;
+    padding: 0 90px; }
+
+.pageTitle {
+  text-align: center;
+  display: block;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px; }
+
+/* navs */
+.nav--main ul, .nav--action ul {
+  list-style-type: none;
+  padding: 0; }
+.nav--main li, .nav--action li {
+  display: inline; }
+.nav--main a, .nav--action a {
+  color: #020201;
+  text-decoration: none;
+  padding: 5px 10px; }
+
+.nav--action {
+  float: right;
+  margin-top: 40px;
+  margin-right: 20px; }
+
+.nav--main {
+  clear: both;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%; }
+  .nav--main img {
+    position: absolute;
+    left: -300px;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out; }
+
+/* nav--main--fixed */
+.nav--main--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+  background: rgba(45, 127, 119, 0.9);
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  z-index: 100000; }
+  .nav--main--fixed a {
+    color: #ffffff; }
+  .nav--main--fixed img {
+    display: inline;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out; }
+
+/* sidebar--fixed */
+.sidebar--fixed {
+  position: fixed;
+  top: 80px;
+  right: 0%;
+  float: right;
+  padding-right: 20px; }
+
+/*
+Blocks
+*/
+.block {
+  position: relative;
+  width: 48%;
+  display: inline-block;
+  margin-bottom: 2.8%;
+  overflow: hidden; }
+  .block a {
+    text-decoration: none;
+    color: #ffffff; }
+    .block a:hover .block__title {
+      bottom: 100px; }
+    .block a:hover .block__hook {
+      bottom: 1rem; }
+
+.block:nth-of-type(odd) {
+  margin-right: 2.8%; }
+
+.block__title, .block__hook {
+  position: absolute;
+  font-family: "droid_sansregular";
+  text-align: right;
+  display: block;
+  text-shadow: 0px 0px 5px #013554;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out; }
+
+.block__title {
+  bottom: 0;
+  right: 1rem; }
+
+.block__hook {
+  bottom: -100px;
+  padding: 0 1rem;
+  background: rgba(2, 2, 1, 0.25); }
+
+/*
+Listings
+*/
+.listing {
+  margin-bottom: 5.6%; }
+  .listing:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.listing__title {
+  margin: 0;
+  font-size: 2.6rem; }
+
+.container--eight .listing__left {
+  width: 22.8%;
+  float: left; }
+.container--eight .listing__right {
+  width: 74.2%;
+  float: right; }
+
+/* Images */
+img {
+  max-width: 100%; }

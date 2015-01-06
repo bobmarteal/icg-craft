@@ -1,0 +1,100 @@
+{#
+ # Program index template
+ #}
+
+{% extends "_layout" %}
+{% set pageTitle = "Educational Programs" %}
+
+
+{% block content %}
+<div class="content" role="main">
+	<div class="container container--full">
+		<div class="hero">
+			<h1 class="pageTitle">{{ pageTitle }}</h1>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna. Donec sed odio dui.</p>
+		</div>
+	</div>
+	<div class="container container--eight left">
+		<h2>Upcoming Education Programs</h2>
+		<section class="isotope">
+		{% for entry in craft.entries.section('dates')%}
+			{% for program in entry.relatedProgram %}
+			<article class="listing--programs {% for option in program.programSeason %}{{ option }} {% endfor %}{% for option in program.programAges %}{{ option }} {% endfor %}{% for option in program.programType %}{{ option }} {% endfor %} ">
+				<div class="listing__left">
+					{% for images in program.programThumbnail %}
+						<img src="{{ images.getUrl('crop160x160') }}" alt="{{ images.title }}" class="listing__thumbnail" />
+					{% endfor %}
+				</div>
+				<div class="listing__right">
+					<h1 class="listing__title"><a href="programs/{{program.slug}}">{{ entry.programSessionDate | date(" M/d")}} -- {{program.title}}
+					 </a></h1>
+					 <p class="listing__hook">{{program.programHook}}<br /></p>
+					
+				</div>
+			</article>
+			{% endfor %}
+		{% endfor %}
+		</section>
+	</div>
+	<div class="container container--four right sidebar">
+
+		<h2>Filter Options</h2>
+		<section id="filters">
+		<p>Ages</p>
+		{# output ages #}
+		<div class="button-group" data-filter-group="ages">
+		{% for entry in craft.entries.section('programs').limit('1') %}
+			{% for option in entry.programAges.options %}
+				<button class="{{ option }} btn btn--small btn--green" data-filter=".{{option}}">{{option.label}}</button>
+			{% endfor %}
+			<button class="btn btn--small" data-filter="">Show All</button>
+		</div>
+
+		<p>Season</p>
+		<div class="button-group" data-filter-group="seasons">
+
+			{% for option in entry.programSeason.options %}
+				<button class="{{ option }} btn btn--small btn--green" data-filter="{% if option != "all" %} .{{option}}{% else %}{% endif %}">{{ option.label }}</button>
+			{% endfor %}
+			<button class="btn btn--small btn--green" data-filter="">Show All</button>
+		</div>
+
+		<p>Type</p>
+		<div class="button-group" data-filter-group="type">
+			{% for option in entry.programType.options %}
+				<button class="{{ option }} btn btn--small btn--green" data-filter=".{{option}}">{{option.label}}</button>
+			{% endfor %}
+			<button class="btn btn--small btn--green" data-filter="">Show All</button>
+		</div>
+		{% endfor %}
+		</section>
+	</div>
+
+{#
+	{% for entry in craft.entries.section('programs').find() %}
+		<article>
+			<h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+			{# program dates }
+			{% if entry.programDates %}
+				<h2>Program Dates</h2>
+				<ul>
+				{% for block in entry.programDates %}
+					
+					{% if block.type == "datesBlock" %}
+						<li>{{ block.date }}</li>
+					{% endif %}
+				{% endfor %}
+				</ul>
+			{% endif %}
+			{{ entry.programHook }}
+			<p>
+				<a href="{{ entry.url }}">Continue reading</a>
+			</p>
+		</article>
+		<hr />
+	{% endfor %}
+#}
+	
+</div>
+{% endblock %}
+

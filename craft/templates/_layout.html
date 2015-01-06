@@ -1,0 +1,41 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+{# <head> #}
+{% include 'includes/_docHeader.html' %}
+
+<body>
+
+		{% include 'includes/_header.html' %}
+		<div class="mainImage">
+			<img src="/images/bubbles.jpg" alt="">
+		</div>	
+
+		
+
+			{# Output block content #}
+			{% block content %}
+			
+				<h1>Nothing in your block.</h1>
+			
+			{% endblock %}
+
+
+		{# <footer> #}
+		{% include 'includes/_footer.html' %}
+
+	{# footer includes #}
+	{% include 'includes/_footerIncludes.html' %}
+
+</body>
+</html>

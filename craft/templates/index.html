@@ -1,0 +1,48 @@
+{#
+ # Homepage template
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+<div class="content" role="main">
+	<div class="container container--full">
+	<div class="hero">
+		<h1 class="pageTitle">{{ entry.heading }}</h1>
+	
+		{{ entry.body }}
+	</div>
+	
+	{# Featured Link Blocks #}
+	{% for entry in craft.entries.section('featuredLinkBlocks').find() %}
+		{% if entry.featuredLinkBlock %}
+			{% for block in entry.featuredLinkBlock %}
+				<article class="block block--linkBlock">
+				{% if block.type =="featuredLinkBlock" %}
+					<a href="{{block.linkLink}}" class="block__link">
+					<h1 class="block__title">{{block.linkTitle}}</h1>
+					<p class="block__hook">{{block.linkHook}}</p>
+					{% for image in block.linkImage %}
+						
+						<img src="/{{image.getUrl()}}" alt="image">
+	
+					{% endfor %}
+
+					
+					</a>
+				{% endif %}
+				</article>
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
+
+{#<h2>Recent News of ICG</h2>
+	<ul>
+		{% for entry in craft.entries.section('news').limit(5).find() %}
+			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+		{% endfor %}
+	</ul>#}

@@ -1,0 +1,54 @@
+{# Creates the shell of the page from _layout.html #}
+{% extends "_layout" %}
+
+{# all the content that gets stuck into _layout #}
+
+{# Set a variable in our page template #}
+{% set setPageContentVariable = 'Set Variable in Page Template' %}
+
+{% block content %}
+	{% set title = "progrm detail" %}
+	{{ title }}
+	<h1>{{entry.title}}</h1>
+	{#{{entry.body}}#}
+
+	{# Set a variable within our block tag #}
+    {% set setBlockContentVariable = 'Set Content from Block Tag in Page Template' %}
+
+    {# Output content in our block tag #}
+    <h3>Block Content in Page Template</h3>
+
+    {# Output a variable from our layout template within our block tag #}
+
+	    {% if setLayoutContentVariable is defined %}
+	    	<h3>Output 'setLayoutContentVariable'</h3>
+	        <p>{{ setLayoutContentVariable }}</p>
+	    {% endif %}
+
+    {# Output a variable from our page template within our block tag #} 
+
+	    {% if setPageContentVariable is defined %}
+	        <h3>output setPageContentVariable</h3>
+	        <p>{{ setPageContentVariable }}</p>
+	    {% endif %}  
+
+	
+	
+
+				
+	{# output fromLayout #}
+	<h3>From layout to page</h3>
+	<p>{{fromLayout}}</p>
+
+
+		{% include '_partial' %}
+
+	
+	<h1>Dates</h1>
+		
+
+		
+{% endblock %}
+
+{# set something for _layout {{setLayoutContent}}#}
+	{% set pageTitle = entry.title %}

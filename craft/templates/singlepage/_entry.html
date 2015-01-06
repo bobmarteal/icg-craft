@@ -1,0 +1,76 @@
+{# template to show a full single page #}
+
+{# extend layout #}
+{% extends "_layout" %}
+
+{# set vars #}
+{% set pageTitle = entry.title %}
+
+{# single page block content #}
+{% block content %}
+<div class="content" role="main">
+	<div class="container container--full">
+		<div class="hero">
+			<h1 class="pageTitle">{{ entry.title }}</h1>
+		</div>
+	</div>
+
+	{# loop through matrix for big content #}
+	<div class="container container--eight left">
+	{% if entry.singlePageContent %}
+
+		{% for block in entry.singlePageContent %}
+
+			{# text #}
+			{% if block.type == "textBlock" %}
+				{{block.text}}
+
+			{% elseif block.type == "imageBlock" %}
+				
+				{% for image in block.image %}
+					<img src="/{{image.getUrl('crop160x160')}}" alt="image">
+				{% endfor %}
+				{##}
+			{% elseif block.type == "quoteBlock" %}
+				<blockquote class="{{ block.position }}">
+					{{ block.quote }}
+					{{ block.citation }}
+				</blockquote>
+
+			{% elseif block.type == "videoBlock" %}
+				<div class="videoContainer {{block.position}}">
+					{{ block.videoEmbedCode | raw }}
+				</div>
+			
+			{% endif %}
+		{% endfor %}	
+
+	{% endif %}
+	</div>
+
+	{# loop through matrix for sidebar #}
+	<div class="container container--four right">
+		
+		{% if entry.singlePageContent %}
+
+		{% for block in entry.singlePageContent %}
+			
+			{% if block.type == "relationsBlock" %}
+				<div>
+					<h2>{{block.relatedBlockTitle}}</h2>
+					<ul>
+						{% for links in block.relatedEntries %}
+						<li>
+							<a href="{{links.uri}}">{{links.title}}</a>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+		{% endfor %}	
+
+	{% endif %}
+
+	</div>
+</div>
+{% endblock %}

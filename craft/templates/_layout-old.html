@@ -1,0 +1,61 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>{% if pageTitle is defined %}{{ pageTitle }} - {% endif %}{{ siteName }}</title>
+	<link rel="home" href="{{ siteUrl }}" />
+	<link rel="stylesheet" href="/css/icg-2013.css">
+</head>
+
+<body>
+	<div id="container">
+		<header id="header">
+			<h1><a href="{{ siteUrl }}">{{ siteName }}</a></h1>
+
+			<nav>
+				<ul>
+					<li><a href="{{ url('news') }}" {% if craft.request.firstSegment == 'news' %}class="active"{% endif %}>News</a></li>
+					<li><a href="{{ url('education') }}">Education</a></li>
+				</ul>
+			</nav>
+		</header>
+		    {# set fromLayout #}
+		    {% set fromLayout = 'variable set in _layout' %}
+
+		    
+		<main id="content" role="main">
+			{# Output block content #}
+			{% block content %}
+				<h1>Nothing in your block.</h1>
+			{% endblock %}
+
+			{# Set a variable in our layout template #}
+			    {% set setLayoutContentVariable = 'Set Content from Layout Template' %}
+
+			{# Output set tag content in our layout template #}
+		    {% if setLayoutContent is defined %}
+		    	<h3>From page to Layout</h3>
+		        <p>{{ setLayoutContent }}</p>
+		    {% endif %}
+
+
+		</main>
+
+		<footer id="footer">
+			{{global1.body}}
+			Copyright {{ now.year }} {{ craft.request.serverName | ucfirst }}. All rights reserved  •  Built with <a href="http://buildwithcraft.com">Craft</a>
+		</footer>
+	</div>
+</body>
+</html>

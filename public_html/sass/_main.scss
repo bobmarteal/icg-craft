@@ -1,0 +1,186 @@
+@import "bourbon";
+body{
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Special Headings */
+.siteTitle{
+	float: left;
+	margin: 30px 0;
+	line-height: 1.5em;
+	margin-left: 20px;
+	a{
+		color:$black;
+		text-decoration: none;
+		padding-left: 120px;
+		padding-bottom: 20px;
+		background: url(../images/layout/turtle-100.png) no-repeat;
+	}
+}
+
+.mainImage{
+	text-align: center;
+}
+
+/*
+Page Header
+*/
+	.hero{
+		position: relative;
+		font-size: 1.5rem;
+		text-align: center;
+		line-height: 1.75;
+		margin-top: -143px;
+		p{
+			margin:3rem 0;
+			padding: 0 90px;
+		}
+	}
+		.pageTitle{
+			text-align:center;
+			display: block;
+			z-index: 2;
+			background: transparentize($white, .5);
+			padding: 10px;
+		}
+
+/* navs */
+	.nav--main, .nav--action{
+		ul{
+			list-style-type: none;
+			padding:0;
+		}
+		li{
+			display: inline;
+		}
+		a{
+			color: $black;
+			text-decoration:none;
+			//background: yellow;
+			padding: 5px 10px;
+		}
+	}
+
+	.nav--action{
+		float:right;
+		margin-top: 40px;
+		margin-right: 20px;
+	}
+	.nav--main{
+		clear: both;
+		font-size: 1.5rem;
+		text-align:center;
+		width: 100%;
+		//@include transition(all 1.0s ease-in-out);
+		img{
+			position: absolute;
+			left:-300px;
+			@include transition(all 0s ease-in-out);
+		}
+	}	
+
+/* nav--main--fixed */
+	.nav--main--fixed{
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin-top: 0;
+		background: transparentize($teal, .1);
+		@include transition(all .5s ease-in-out);
+		z-index: 100000;
+		a{
+			color: $white;
+		}
+		img{
+			display: inline;
+			position: absolute;
+			left: 20px;
+			top: 10px;
+			@include transition(all 2s ease-in-out);
+		}
+	}
+
+/* sidebar--fixed */
+.sidebar--fixed{
+	position:fixed;
+	top: 80px;
+	right: 0%;
+	float: right;
+	padding-right: 20px;
+}
+
+/*
+Blocks
+*/
+
+	.block{
+		position:relative;
+		width: 48%;
+		display:inline-block;
+		margin-bottom: $gutter;
+		overflow:hidden;
+		a{
+			text-decoration: none;
+			color: $white;
+			&:hover{
+				.block__title{
+					bottom: 100px;
+				}
+				.block__hook{
+					bottom: 1rem;
+				}
+			}
+		}
+	}
+		.block:nth-of-type(odd){
+			margin-right: $gutter;
+		}
+		.block__title, .block__hook{
+			position:absolute;
+			font-family: $bodyFont;	
+			text-align: right;
+			display:block;
+			@include text-shadow();
+			@include transition(all 2s ease-in-out);	
+		}
+		.block__title{
+			bottom: 0;
+			right: 1rem;
+
+		}
+		.block__hook{
+			bottom: -100px;
+			padding: 0 1rem;
+			background: transparentize($black, .75);
+		}
+
+/*
+Listings
+*/
+	.listing{
+		@include clearfix;
+		margin-bottom: 2 * $gutter;
+	}
+	.listing__title{
+		margin:0;
+		font-size: 2.6rem;
+	}
+	.container--eight{
+		.listing__left{
+			width: 22.8%;
+			float: left;
+		}
+		.listing__right{
+			width: 74.2%;
+			float: right;
+		}
+	}
+
+/* Images */
+
+	img{
+		max-width:100%;
+	}
+
+
+

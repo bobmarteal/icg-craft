@@ -1,0 +1,25 @@
+{# Output content in our include template #}
+<h3>Content in Partial Template</h3>
+
+{# Output a set variable from our layout, that was handed 
+   off to our partial template using the `with` statement
+   of the include tag #}
+{% if setLayoutContentVariable is defined %}
+	<p><strong>setLayoutContentVariable</strong></p>
+    <em>{{ setLayoutContentVariable }}</em>
+{% endif %}
+
+{# Output a set variable from our page where this partial was included #}
+{% if setPageContentVariable is defined %}
+	<p><strong>setPageContentVariable</strong></p>
+    <em>{{ setPageContentVariable }}</em>
+{% endif %}
+
+{# Output a set variable from the block tag where this partial was included #}
+{% if setBlockContentVariable is defined %}
+	<p><strong>setBlockContentVariable</strong></p>
+    <em>{{ setBlockContentVariable }}</em>
+{% endif %}
+
+<h3>Page Title from page </h3>
+{{pageTitle}}

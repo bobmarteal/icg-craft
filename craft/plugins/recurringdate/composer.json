@@ -1,0 +1,5 @@
+{
+    "require": {
+        "simshaun/recurr": "dev-master"
+    }
+}

@@ -1,0 +1,81 @@
+{# template to show a full program page #}
+
+{# extend layout #}
+{% extends "_layout" %}
+
+{# set vars #}
+{% set pageTitle = entry.title %}
+
+
+{# program block content #}
+{% block content %}
+<div class="content" role="main">
+	<div class="container container--full">
+		<div class="hero">
+			<h1 class="pageTitle">{{ entry.title }}</h1>
+		</div>
+	</div>
+	<article>
+		<div class="container container--eight left">
+		{# full Content #}
+		{% if entry.programFullContent %}
+			{% for block in entry.programFullContent %}
+				{% if block.type == "textBlock" %}
+					{{ block.text }}
+
+				{% elseif block.type == "imageBlock" %}
+				<ul>
+					{% for image in block.image %}
+						<li>
+						<img src="/{{image.getUrl()}}" alt="image">
+						{{ image.title }}
+						</li>	
+					{% endfor %}
+				</ul>	
+				
+				{% elseif block.type == "quoteBlock" %}
+					<blockquote class="{{ block.position }}">
+						{{ block.quote }}
+						{{ block.citation }}
+					</blockquote>
+					
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+
+		{# show only this entry's categories #}
+
+
+		{# Categories 
+		<ul>
+		    {% nav category in craft.categories.group('programType') %}
+		        <li>
+		            <a href="{{ category.url }}">{{ category.title }}</a>
+		            {% ifchildren %}
+		                <ul>
+		                    {% children %}
+		                </ul>
+		            {% endifchildren %}
+		        </li>
+		    {% endnav %}
+		</ul>#}
+		</div>
+		<div class="container container--four right">
+			
+		{# program dates #}
+		{% if entry.programDates %}
+			<h2>Program Dates</h2>
+			<ul>
+			{% for block in entry.programDates %}
+				
+				{% if block.type == "datesBlock" %}
+					<li>{{ block.date }}</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		{% endif %}
+
+		</div>
+	</article>
+</div>
+{% endblock %}
