@@ -3,18 +3,44 @@ body{
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
+/* links */
+a{
+	color: $orange;
+	text-decoration: none;
+	border-bottom: 2px solid $orange;
+}
+
+/* paragraphs */
+p {
+	margin: 0 0 1.5rem 0;
+}
+
+/* lists */
+ul{
+	padding: 0;
+}
+li{
+	margin-bottom: .5rem;
+}
+
+
 /* Special Headings */
 .siteTitle{
-	float: left;
-	margin: 30px 0;
+	width: 100%;
+	margin-top: 0;
 	line-height: 1.5em;
-	margin-left: 20px;
+	
+	font-size: 4rem;
 	a{
 		color:$black;
+		display:block;
+		max-width: 940px;
 		text-decoration: none;
-		padding-left: 120px;
-		padding-bottom: 20px;
-		background: url(../images/layout/turtle-100.png) no-repeat;
+		padding: 20px 0 20px 120px;
+		//padding-bottom: 20px;
+		margin: 0 auto;
+		background: url(../images/layout/turtle-100.png) no-repeat 0 50%;
+		border-bottom: 0;
 	}
 }
 
@@ -30,9 +56,10 @@ Page Header
 		font-size: 1.5rem;
 		text-align: center;
 		line-height: 1.75;
-		margin-top: -143px;
+		margin-top: -80px;
+		margin-bottom: 3rem;
 		p{
-			margin:3rem 0;
+			margin:3rem 0 0;
 			padding: 0 90px;
 		}
 	}
@@ -40,8 +67,9 @@ Page Header
 			text-align:center;
 			display: block;
 			z-index: 2;
-			background: transparentize($white, .5);
+			background: transparentize($white, .25);
 			padding: 10px;
+			text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.9);
 		}
 
 /* navs */
@@ -51,31 +79,67 @@ Page Header
 			padding:0;
 		}
 		li{
-			display: inline;
+			display: inline-block;
 		}
 		a{
 			color: $black;
 			text-decoration:none;
-			//background: yellow;
-			padding: 5px 10px;
+			border-bottom: none;
+			padding: 5px 0;
+			margin: 0 10px;
 		}
 	}
 
 	.nav--action{
-		float:right;
-		margin-top: 40px;
-		margin-right: 20px;
+		background: $teal;
+		margin-bottom: 3rem;
+		padding-top: 5px;
+		font-size: 1rem;
+		a{
+			//border-bottom: none;
+			color: $white;
+		}
+		ul{
+			max-width: 1060px;
+			margin: 0 auto;
+			text-align: right;
+		}
 	}
 	.nav--main{
 		clear: both;
 		font-size: 1.5rem;
 		text-align:center;
 		width: 100%;
-		//@include transition(all 1.0s ease-in-out);
+
+		a{
+			padding: 14x 10px;
+			background: $white;
+		}
 		img{
 			position: absolute;
 			left:-300px;
 			@include transition(all 0s ease-in-out);
+		}
+		ul{
+			margin-bottom: 2px;
+		}
+		li{
+			position: relative;	
+			ul{
+				position: absolute;
+				right: 10000px;		
+			}
+			&:hover{
+				ul{
+					left: 0;
+					background: transparentize ($white, .15);
+					a{
+						display:block;
+						width: 200px;
+						text-align: left;
+					}				
+				}
+			}
 		}
 	}	
 
@@ -85,18 +149,45 @@ Page Header
 		top: 0;
 		left: 0;
 		margin-top: 0;
-		background: transparentize($teal, .1);
+		padding-top: 5px;
+		background: transparentize($teal, .02);
 		@include transition(all .5s ease-in-out);
 		z-index: 100000;
 		a{
+			font-size: 1.5rem;
 			color: $white;
+			background: none;
 		}
+		ul{
+			margin: 0;
+		}
+		li{
+			position: relative;	
+			ul{
+				position: absolute;
+				right: 10000px;		
+				
+			}
+			&:hover{
+				ul{
+					left: 0;
+					margin-top: 3px;
+					a{
+						display:block;
+						width: 200px;
+						text-align: left;
+						background: transparentize($teal, .02);
+					}				
+				}
+			}
+		}
+		
 		img{
 			display: inline;
 			position: absolute;
 			left: 20px;
 			top: 10px;
-			@include transition(all 2s ease-in-out);
+			@include transition(display 2s ease-in-out);
 		}
 	}
 
@@ -104,9 +195,6 @@ Page Header
 .sidebar--fixed{
 	position:fixed;
 	top: 80px;
-	right: 0%;
-	float: right;
-	padding-right: 20px;
 }
 
 /*
@@ -122,6 +210,7 @@ Blocks
 		a{
 			text-decoration: none;
 			color: $white;
+			border-bottom: none;
 			&:hover{
 				.block__title{
 					bottom: 100px;
@@ -159,15 +248,19 @@ Listings
 */
 	.listing{
 		@include clearfix;
-		margin-bottom: 2 * $gutter;
+		margin-bottom: 2rem;
+		@include clearfix();
 	}
 	.listing__title{
-		margin:0;
-		font-size: 2.6rem;
+		//margin:0;
+		font-size: 1.5rem;
+		line-height: 2.5rem;
+		font-family: $bodyFont;
+		color: $orange;
 	}
 	.container--eight{
 		.listing__left{
-			width: 22.8%;
+			width: 20.8%;
 			float: left;
 		}
 		.listing__right{
@@ -182,5 +275,29 @@ Listings
 		max-width:100%;
 	}
 
+/* Video */
 
+	.videoWrapper {
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		padding-top: 25px;
+		margin-bottom: 1.5rem;
+		height: 0;
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+/* block quotes */
+
+blockquote{
+	margin: 0 0 1.5rem $gutter;
+	border-left: 5px solid $darkBlue;
+	padding-left: $gutter;
+	font-style: italic;
+}
 

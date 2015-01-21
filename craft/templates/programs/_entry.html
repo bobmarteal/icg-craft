@@ -65,14 +65,15 @@
 		{# program dates #}
 		{% if entry.programDates %}
 			<h2>Program Dates</h2>
-			<ul>
+			
 			{% for block in entry.programDates %}
 				
 				{% if block.type == "datesBlock" %}
-					<li>{{ block.date }}</li>
+					<p>{% if block.day %}{{ block.day }} {% endif%} {{ block.beginDate | date('M j') }} {% if block.endDate %} - 
+					{{block.endDate | date('M j')}} {% endif %}</p>
 				{% endif %}
 			{% endfor %}
-			</ul>
+			
 		{% endif %}
 
 		</div>

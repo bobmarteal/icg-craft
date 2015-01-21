@@ -14,21 +14,38 @@
 			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna. Donec sed odio dui.</p>
 		</div>
 	</div>
-	<div class="container container--eight left">
+	<div class="container container--eight right">
 		<h2>Upcoming Education Programs</h2>
 		<section class="isotope">
-		{% for entry in craft.entries.section('dates')%}
+		{% set now = now|date_modify('-2 min') %}
+		{#{% for entry in craft.entries.section('dates').programSessionDate('> ' - present) %}#}
+
+		{% for entry in craft.entries.section('dates').programSessionDate('>= ' ~ now|date('c'))%}
+
+
 			{% for program in entry.relatedProgram %}
-			<article class="listing--programs {% for option in program.programSeason %}{{ option }} {% endfor %}{% for option in program.programAges %}{{ option }} {% endfor %}{% for option in program.programType %}{{ option }} {% endfor %} ">
+			<article class="listing--programs listing {% for option in program.programSeason %}{{ option }} {% endfor %}{% for option in program.programAges %}{{ option }} {% endfor %}{% for option in program.programType %}{{ option }} {% endfor %} ">
 				<div class="listing__left">
 					{% for images in program.programThumbnail %}
 						<img src="{{ images.getUrl('crop160x160') }}" alt="{{ images.title }}" class="listing__thumbnail" />
 					{% endfor %}
 				</div>
 				<div class="listing__right">
-					<h1 class="listing__title"><a href="programs/{{program.slug}}">{{ entry.programSessionDate | date(" M/d")}} -- {{program.title}}
+					<h1 class="listing__title">
+						<a href="programs/{{program.slug}}">{{program.title}}
 					 </a></h1>
-					 <p class="listing__hook">{{program.programHook}}<br /></p>
+					 {# program dates #}
+				{% if program.programDates %}
+					<span>{% for block in program.programDates %}		
+						{% if block.type == "datesBlock" %}
+							{% if block.day %}{{ block.day }} {% endif%} {{ block.beginDate | date('M j') }} {% if block.endDate %} - 
+							{{block.endDate | date('M j')}}  {% endif %} {% if not loop.last %}, {% endif %}
+						{% endif %}
+						
+					{% endfor %}	
+				</span>
+				{% endif %}
+					<p class="listing__hook">{{program.programHook}}<br /></p>
 					
 				</div>
 			</article>
@@ -36,18 +53,18 @@
 		{% endfor %}
 		</section>
 	</div>
-	<div class="container container--four right sidebar">
+	<div class="container container--four left sidebar">
 
 		<h2>Filter Options</h2>
 		<section id="filters">
 		<p>Ages</p>
 		{# output ages #}
-		<div class="button-group" data-filter-group="ages">
-		{% for entry in craft.entries.section('programs').limit('1') %}
-			{% for option in entry.programAges.options %}
-				<button class="{{ option }} btn btn--small btn--green" data-filter=".{{option}}">{{option.label}}</button>
-			{% endfor %}
-			<button class="btn btn--small" data-filter="">Show All</button>
+			<div class="button-group" data-filter-group="ages">
+			{% for entry in craft.entries.section('programs').limit('1') %}
+				{% for option in entry.programAges.options %}
+					<button class="{{ option }} btn btn--small btn--green" data-filter=".{{option}}">{{option.label}}</button>
+				{% endfor %}
+				<button class="btn btn--small btn--green" data-filter="">Clear</button>
 		</div>
 
 		<p>Season</p>
@@ -56,7 +73,7 @@
 			{% for option in entry.programSeason.options %}
 				<button class="{{ option }} btn btn--small btn--green" data-filter="{% if option != "all" %} .{{option}}{% else %}{% endif %}">{{ option.label }}</button>
 			{% endfor %}
-			<button class="btn btn--small btn--green" data-filter="">Show All</button>
+			<button class="btn btn--small btn--green" data-filter="">Clear</button>
 		</div>
 
 		<p>Type</p>
@@ -64,7 +81,7 @@
 			{% for option in entry.programType.options %}
 				<button class="{{ option }} btn btn--small btn--green" data-filter=".{{option}}">{{option.label}}</button>
 			{% endfor %}
-			<button class="btn btn--small btn--green" data-filter="">Show All</button>
+			<button class="btn btn--small btn--green" data-filter="">Clear</button>
 		</div>
 		{% endfor %}
 		</section>

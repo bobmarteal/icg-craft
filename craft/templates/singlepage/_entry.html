@@ -25,12 +25,18 @@
 			{% if block.type == "textBlock" %}
 				{{block.text}}
 
-			{% elseif block.type == "imageBlock" %}
-				
-				{% for image in block.image %}
-					<img src="/{{image.getUrl('crop160x160')}}" alt="image">
-				{% endfor %}
-				{##}
+			{% elseif block.type == "slideshow" %}
+				<h3>{{ block.slideshowTitle }}</h3>
+				<div class="flexslider">
+					<ul class="slides">
+					{% for image in block.image %}
+						<li>
+							<img src="/{{image.getUrl()}}" alt="image">
+							<span class="imageTitle">{{ image.title}}</span>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
 			{% elseif block.type == "quoteBlock" %}
 				<blockquote class="{{ block.position }}">
 					{{ block.quote }}
@@ -38,7 +44,7 @@
 				</blockquote>
 
 			{% elseif block.type == "videoBlock" %}
-				<div class="videoContainer {{block.position}}">
+				<div class="videoWrapper">
 					{{ block.videoEmbedCode | raw }}
 				</div>
 			
@@ -51,25 +57,29 @@
 	{# loop through matrix for sidebar #}
 	<div class="container container--four right">
 		
-		{% if entry.singlePageContent %}
+		{% if entry.singlePageSidebar %}
 
-		{% for block in entry.singlePageContent %}
-			
-			{% if block.type == "relationsBlock" %}
-				<div>
-					<h2>{{block.relatedBlockTitle}}</h2>
-					<ul>
-						{% for links in block.relatedEntries %}
-						<li>
-							<a href="{{links.uri}}">{{links.title}}</a>
-						</li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% endif %}
-		{% endfor %}	
+			{% for block in entry.singlePageSidebar %}
+				
+				{% if block.type == "relationsBlock" %}
+					<div>
+						<h2>{{block.relatedBlockTitle}}</h2>
+						<ul>
+							{% for links in block.relatedEntries %}
+							<li>
+								<a href="{{links.uri}}">{{links.title}}</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
 
-	{% endif %}
+				{% elseif block.type == "sidebarText"%}
+					{{ block.text }}
+				{% endif %}
+			{% endfor %}	
+
+		{% endif %}
+
 
 	</div>
 </div>

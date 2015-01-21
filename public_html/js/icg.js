@@ -51,7 +51,7 @@ jQuery(document).ready(function($){
 		$(document).scroll(function(){
 			var scrollTop = $(this).scrollTop();
 			if (scrollTop > y_pos + height){
-			$stickyBar.addClass("nav--main--fixed").clearQueue().animate({ top: "0px" }, 0);
+			$stickyBar.addClass("nav--main--fixed").clearQueue().animate({ top: "0px" }, 1);
 			} else if (scrollTop <= y_pos){
 			$stickyBar.removeClass("nav--main--fixed").clearQueue().animate({ top: "0px" }, 0);
 			}
@@ -63,14 +63,17 @@ jQuery(document).ready(function($){
 	(function($, undefined){
 		"use strict";
 
+		var $filters= $("#filters"),
+		width = $filters.width();
+
 		var $stickyBar = $(".sidebar"),
 		y_pos = $stickyBar.offset().top;
-		//height = $stickyBar.height();
+		
 
 		$(document).scroll(function(){
 			var scrollTop = $(this).scrollTop();
 			if (scrollTop > y_pos - 230 ){
-			$stickyBar.addClass("sidebar--fixed");
+			$stickyBar.addClass("sidebar--fixed").width(width);
 			} else if (scrollTop <= y_pos){
 			$stickyBar.removeClass("sidebar--fixed").clearQueue();
 			}
@@ -79,3 +82,8 @@ jQuery(document).ready(function($){
 	})(jQuery, undefined);
 			
 });
+
+  $(window).load(function() {
+    $('.flexslider').flexslider();
+  });
+

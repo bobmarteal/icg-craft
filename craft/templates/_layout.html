@@ -18,7 +18,11 @@
 
 		{% include 'includes/_header.html' %}
 		<div class="mainImage">
-			<img src="/images/bubbles.jpg" alt="">
+			{% for entry in craft.entries.section('panos').order('RAND()').limit(1) %}
+				{% for pano in entry.pano %}
+					<img src="/{{pano.getUrl()}}" alt="{{pano.title}}">
+				{% endfor %}
+			{% endfor %}
 		</div>	
 
 		

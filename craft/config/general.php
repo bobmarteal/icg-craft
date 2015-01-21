@@ -8,5 +8,26 @@
  */
 
 return array(
-	'devMode' =>true,
+    '*' => array(
+        // ...
+    ),
+
+    'ontherocks.dev' => array(
+        // ...
+		'devMode'  => true,
+        'environmentVariables' => array(
+            //'basePath' => '/users/brandon/Sites/example.dev/public/',
+            
+            'baseUrl'  => 'http://ontherocks.dev/'
+        )
+    ),
+
+    '216.243.141.194' => array(
+        // ...
+        'devMode' => true,
+        'environmentVariables' => array(
+            //'basePath' => '/storage/av12345/www/public_html/',
+            'baseUrl'  => 'http://216.243.141.194',
+        )
+    )
 );

@@ -1,5 +1,26 @@
+{% set entries = craft.entries.section('mainNavigation').find() %}
 
-<ul>
+<ul id="nav">
+    {% nav entry in entries %}
+        <li>
+        	{% if entry.type == "mainNavigationEntries" %}
+				{% for link in entry.navigationEntries %}
+				<a href="{% if link.slug == "homepage"%}/{% else %}/{{link.slug}}{% endif %}">{{entry.title}}</a>
+				{% endfor %}
+			{% elseif entry.type == "mainNavigationText" %}
+			<a href="/{{entry.navigationTextLink}}">{{entry.title}}</a>
+        	{% endif %}
+            
+            {% ifchildren %}
+                <ul>
+                    {% children %}
+                </ul>
+            {% endifchildren %}
+        </li>
+    {% endnav %}
+</ul>
+
+{#<ul>
 {% for entry in craft.entries.section('mainNavigation').find() %}
 		{% if entry.type == "mainNavigationEntries" %}
 			{% for link in entry.navigationEntries %}
@@ -11,4 +32,4 @@
 			<li><a href="/{{entry.navigationTextLink}}">{{entry.title}}</a></li>
 		{% endif %}
 {% endfor %}
-</ul>
+</ul>#}

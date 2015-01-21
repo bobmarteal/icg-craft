@@ -7019,7 +7019,7 @@ Craft.DeleteUserModal = Garnish.Modal.extend(
 			).appendTo(Garnish.$bod),
 			$body = $(
 				'<div class="body">' +
-					'<p>'+Craft.t('What do you want to do with the their content?')+'</p>' +
+					'<p>'+Craft.t('What do you want to do with their content?')+'</p>' +
 					'<div class="options">' +
 						'<label><input type="radio" name="contentAction" value="transfer"/> '+Craft.t('Transfer it to:')+'</label>' +
 						'<div id="transferselect'+this.id+'" class="elementselect">' +
@@ -12695,6 +12695,8 @@ Craft.TagSelectInput = Craft.BaseElementSelectInput.extend(
 	$addTagInput: null,
 	$spinner: null,
 
+	_ignoreBlur: false,
+
 	init: function(settings)
 	{
 		// Normalize the settings
@@ -12760,6 +12762,12 @@ Craft.TagSelectInput = Craft.BaseElementSelectInput.extend(
 
 		this.addListener(this.$addTagInput, 'blur', function()
 		{
+			if (this._ignoreBlur)
+			{
+				this._ignoreBlur = false;
+				return;
+			}
+
 			setTimeout($.proxy(function()
 			{
 				if (this.searchMenu)
@@ -12836,6 +12844,11 @@ Craft.TagSelectInput = Craft.BaseElementSelectInput.extend(
 						attachToElement: this.$addTagInput,
 						onOptionSelect: $.proxy(this, 'selectTag')
 					});
+
+					this.addListener($menu, 'mousedown', $.proxy(function()
+					{
+						this._ignoreBlur = true;
+					}, this));
 
 					this.searchMenu.show();
 				}
